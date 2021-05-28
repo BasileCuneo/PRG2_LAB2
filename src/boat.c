@@ -49,19 +49,23 @@ void destroyBoat(Boat* boat) {
    free(boat);
    boat = NULL;
 }
-/*
-bool isSailing(const Boat* boat) {
 
+bool isSailing(const Boat* boat) {
+    return boat->propulsionType == SAIL;
 }
 
 bool isFishing(const Boat* boat) {
-
+    if(boat->propulsionType != SAIL)
+        return boat->boatProperties.motorBoat->motorBoatType == FISHING;
+    return false;
 }
 
 bool isPleasure(const Boat* boat) {
-
+    if(boat->propulsionType != SAIL)
+        return boat->boatProperties.motorBoat->motorBoatType == PLEASURE;
+    return false;
 }
-*/
+
 void showBoat(const Boat* boat) {
    printf("Nom: %s\n", boat->boatName);
    printf("Type: %s\n", PROPULSION_NAMES[boat->propulsionType]);
