@@ -4,4 +4,4 @@ project(lab_2 C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Wconversion -Wsign-conversion -pedantic")
 
-add_executable(lab_2 main.c)
+add_executable(lab_2 main.c boat.c)
