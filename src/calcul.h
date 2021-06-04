@@ -42,7 +42,7 @@
 typedef double Price;
 
 // ------------------------------------------------------------------------------
-// la fonction calcule la taxe annuelle du bateau et la retourne
+// Calcule la taxe annuelle du bateau et la retourne
 // ------------------------------------------------------------------------------
 Price taxe(const Boat* boat);
 
