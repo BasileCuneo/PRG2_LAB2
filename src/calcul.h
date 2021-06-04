@@ -1,6 +1,9 @@
 #ifndef PRG2_LAB2_CALCUL_H
 #define PRG2_LAB2_CALCUL_H
 
+#include <stdlib.h>
+#include "boat.h"
+
 size_t[] sumAnnualTaxes(const Boat[] port, size_t nbBoats);
 
 double[] meanAnnualTaxes(const Boat[] port, size_t nbBoats);

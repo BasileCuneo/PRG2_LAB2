@@ -4,7 +4,7 @@
 #include "boat.h"
 #define NB_BOATS 10
 
-int main() {
+int main(void) {
    Boat* port[NB_BOATS];
 
    port[0] = sailBoat("Flying Clipper", 125);
@@ -13,7 +13,7 @@ int main() {
    port[3] = pleasureBoat("Flying Dutchman", 500, 10, "Davy Jones");
    port[4] = sailBoat("Queen Anne's Revenge", 6700);
    port[5] = fishingBoat("Sedov", 400, 50);
-   port[6] = pleasureBoat("Silent Mary", 1250, 60, "Armando Slazar");
+   port[6] = pleasureBoat("Silent Mary", 1250, 60, "Armando Salazar");
    port[7] = fishingBoat("Otter", 180, 25);
    port[8] = sailBoat("Preussen", 210);
    port[9] = pleasureBoat("Interceptor", 25, 5, "Lord Becket");

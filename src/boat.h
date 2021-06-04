@@ -10,7 +10,6 @@ typedef enum {SAIL, MOTOR} PropulsionType;
 
 typedef enum {FISHING, PLEASURE} MotorBoatType;
 
-// TODO: regarder si mettre en extern est mieux
 static const Name PROPULSION_NAMES[] = {"Voilier", "Bateau a moteur"};
 static const Name MOTOR_BOAT_NAMES[] = {"Bateau de peche", "Bateau de plaisance"};
 
