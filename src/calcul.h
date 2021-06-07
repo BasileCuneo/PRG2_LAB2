@@ -42,41 +42,41 @@
 typedef double Price;
 
 // ------------------------------------------------------------------------------
-// Calcule la taxe annuelle du bateau et la retourne
+// Calcule la taxe annuelle du bateau et la retourne.
 // ------------------------------------------------------------------------------
 Price taxe(const Boat* boat);
 
 // ------------------------------------------------------------------------------
 // Calcule la somme des taxes annuelles des bateaux du port qui
-// correspondent à la condition passée en paramètre, retourne la somme
+// correspondent à la condition passée en paramètre, retourne la somme.
 // ------------------------------------------------------------------------------
-Price sumAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price sumAnnualTaxes(const Boat port[], size_t nbBoats,
                      bool (* condition)(const Boat* boat));
 
 // ------------------------------------------------------------------------------
 // Calcule la moyenne des taxes annuelles des bateaux du port qui
-// correspondent à la condition passée en paramètre, retourne la moyenne
+// correspondent à la condition passée en paramètre, retourne la moyenne.
 // ------------------------------------------------------------------------------
-Price meanAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price meanAnnualTaxes(const Boat port[], size_t nbBoats,
                       bool (* condition)(const Boat* boat));
 
 // ------------------------------------------------------------------------------
 // Calcule la médiane des taxes annuelles des bateaux du port
-// qui correspondent à la condition passée en paramètre, retourne la médiane
+// qui correspondent à la condition passée en paramètre, retourne la médiane.
 // ------------------------------------------------------------------------------
-Price medianAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price medianAnnualTaxes(const Boat port[], size_t nbBoats,
                         bool (* condition)(const Boat* boat));
 
 // ------------------------------------------------------------------------------
 // Calcule la déviation standard des taxes annuelles des bateaux
-// du port qui correspondent à la condition passée en paramètre, retourne la médiane
+// du port qui correspondent à la condition passée en paramètre, retourne la médiane.
 // ------------------------------------------------------------------------------
-Price stddevAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price stddevAnnualTaxes(const Boat port[], size_t nbBoats,
                         bool (* condition)(const Boat* boat));
 
 // ------------------------------------------------------------------------------
-// Affiche les taxes perçus du port
+// Affiche les taxes perçus du port.
 // ------------------------------------------------------------------------------
-void showTaxesPerCat(const Boat** port, size_t nbBoat);
+void showTaxesPerCat(const Boat port[], size_t nbBoat);
 
 #endif //PRG2_LAB2_CALCUL_H

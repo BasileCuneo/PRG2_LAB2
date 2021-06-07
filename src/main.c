@@ -20,7 +20,8 @@
 #include "calcul.h"
 
 int main(void) {
-   Boat* port[] = {
+   // Construction du port.
+   Boat port[] = {
       sailBoat("Flying Clipper", 125),
       fishingBoat("Viking", 200, 10),
       pleasureBoat("Black Pearl", 1000, 50, "Jack Sparrow"),
@@ -35,23 +36,14 @@ int main(void) {
 
    const size_t NB_BOATS = sizeof(port) / sizeof(port[0]);
 
-   // Affiche les informations des tous les bateaux.
+   // Affiche les informations de tous les bateaux.
    for (size_t i = 0; i < NB_BOATS; ++i) {
       printf("Bateau numero: %" PRIu64 "\n", i);
-      if (port[i] == NULL) {
-         printf("Erreur lors de la creation du bateau\n\n");
-      } else {
-         showBoat(port[i]);
-      }
+      showBoat(&port[i]);
    }
 
    // Affiches les taxes des bateaux par catégorie.
-   showTaxesPerCat((const Boat**) port, NB_BOATS);
+   showTaxesPerCat(port, NB_BOATS);
 
-   // Libère la mémoire.
-   for (size_t i = 0; i < NB_BOATS; ++i) {
-      destroyBoat(port[i]);
-   }
-
-   return 0;
+   return EXIT_SUCCESS;
 }

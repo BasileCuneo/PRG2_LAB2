@@ -11,13 +11,13 @@
  Compilateur    : Mingw-w64 gcc 8.1.0
  -----------------------------------------------------------------------------------
 */
+
 #include <stdio.h>
 #include <math.h>
-
 #include "calcul.h"
 
 // ------------------------------------------------------------------------------
-// Calcule la taxe annuelle du bateau et la retourne
+// Calcule la taxe annuelle du bateau et la retourne.
 // ------------------------------------------------------------------------------
 Price taxe(const Boat* boat) {
    Price taxe = 0;
@@ -25,26 +25,24 @@ Price taxe(const Boat* boat) {
    switch (boat->propulsionType) {
       case SAIL:
          taxe += BASE_SAIL; // Taxe de base pour un bateau à voile
-         if (boat->properties.sailing->sailSurface >= TAXED_SAIL) {
+         if (boat->properties.sailing.sailSurface >= TAXED_SAIL) {
             taxe += BIG_SAIL; // Taxe pour grande surface de voile
          }
          break;
       case MOTOR:
          taxe += BASE_MOTOR; // Taxe de base pour un bateau à moteur
-         switch (boat->properties.motor->type) {
+         switch (boat->properties.motor.type) {
             case FISHING:
-               if (boat->properties.motor->properties.fishing->fishMaxWeight >=
-                   TAXED_WEIGHT) {
+               if (boat->properties.motor.properties.fishing.fishMaxWeight >= TAXED_WEIGHT) {
                   taxe += BIG_FISH_WEIGHT; // Taxe additionnelle fixe pour grosse pèche
                }
                break;
             case PLEASURE:
-               if (boat->properties.motor->power < TAXED_POWER) {
+               if (boat->properties.motor.power < TAXED_POWER) {
                   taxe += SMALL_PLEASURE_MOTOR; // Taxe additionnelle fixe pour petit moteur
                } else {
                   // Taxe additionnelle dépendant de la longueur du bateau
-                  taxe += boat->properties.motor->properties.pleasure->length *
-                          LENGTH_MULT;
+                  taxe += boat->properties.motor.properties.pleasure.length * LENGTH_MULT;
                }
                break;
          }
@@ -55,16 +53,16 @@ Price taxe(const Boat* boat) {
 
 // ------------------------------------------------------------------------------
 // Calcule la somme des taxes annuelles des bateaux du port qui
-// correspondent à la condition passée en paramètre, retourne la somme
+// correspondent à la condition passée en paramètre, retourne la somme.
 // ------------------------------------------------------------------------------
-Price sumAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price sumAnnualTaxes(const Boat port[], size_t nbBoats,
                      bool (* condition)(const Boat*)) {
    Price sum = 0;
 
    // Calcul la somme des taxes de tous les bateaux respectant la condition.
    for (size_t i = 0; i < nbBoats; ++i) {
-      if (condition(port[i])) {
-         sum += taxe(port[i]);
+      if (condition(&port[i])) {
+         sum += taxe(&port[i]);
       }
    }
 
@@ -73,9 +71,9 @@ Price sumAnnualTaxes(const Boat* port[], size_t nbBoats,
 
 // ------------------------------------------------------------------------------
 // Calcule la moyenne des taxes annuelles des bateaux du port qui
-// correspondent à la condition passée en paramètre, retourne la moyenne
+// correspondent à la condition passée en paramètre, retourne la moyenne.
 // ------------------------------------------------------------------------------
-Price meanAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price meanAnnualTaxes(const Boat port[], size_t nbBoats,
                       bool (* condition)(const Boat*)) {
    size_t taxedBoat = 0;
    Price sum = 0;
@@ -83,9 +81,9 @@ Price meanAnnualTaxes(const Boat* port[], size_t nbBoats,
    // Calcul la somme des taxes de tous les bateaux respectant la condition.
    // Et récupère le nombre de bateau respectant la condition.
    for (size_t i = 0; i < nbBoats; ++i) {
-      if (condition(port[i])) {
+      if (condition(&port[i])) {
          ++taxedBoat;
-         sum += taxe(port[i]);
+         sum += taxe(&port[i]);
       }
    }
 
@@ -96,6 +94,9 @@ Price meanAnnualTaxes(const Boat* port[], size_t nbBoats,
 // Retourne la valeur de comparaison de deux prix (p.ex. l'utilisation de qsort).
 // ------------------------------------------------------------------------------
 int cmpfunc_price(const void* a, const void* b) {
+   // On ne retourne pas directement *(Price*) a - *(Price*) b
+   // car s'il y a une différence de 0.5 le cast en int aura pour effet de
+   // retourner 0 alors qu'ils ne sont pas égaux.
    if (*(Price*) a > *(Price*) b) {
       return 1;
    } else if (*(Price*) a < *(Price*) b) {
@@ -107,9 +108,9 @@ int cmpfunc_price(const void* a, const void* b) {
 
 // ------------------------------------------------------------------------------
 // Calcule la médiane des taxes annuelles des bateaux du port
-// qui correspondent à la condition passée en paramètre, retourne la médiane
+// qui correspondent à la condition passée en paramètre, retourne la médiane.
 // ------------------------------------------------------------------------------
-Price medianAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price medianAnnualTaxes(const Boat port[], size_t nbBoats,
                         bool (* condition)(const Boat*)) {
    Price txs[nbBoats];
    size_t nEffectiveBoat = 0;
@@ -117,8 +118,8 @@ Price medianAnnualTaxes(const Boat* port[], size_t nbBoats,
    // Calcul la taxe de tous les bateaux respectant la condition.
    // Et récupère le nombre de bateau respectant la condition.
    for (size_t i = 0; i < nbBoats; ++i) {
-      if (condition(port[i])) {
-         txs[nEffectiveBoat] = taxe(port[i]);
+      if (condition(&port[i])) {
+         txs[nEffectiveBoat] = taxe(&port[i]);
          ++nEffectiveBoat;
       }
    }
@@ -140,10 +141,10 @@ Price medianAnnualTaxes(const Boat* port[], size_t nbBoats,
 }
 
 // ------------------------------------------------------------------------------
-// Calcule la déviation standard des taxes annuelles des bateaux
-// du port qui correspondent à la condition passée en paramètre, retourne la médiane
+// Calcule la déviation standard des taxes annuelles des bateaux du port
+// qui correspondent à la condition passée en paramètre, retourne la médiane.
 // ------------------------------------------------------------------------------
-Price stddevAnnualTaxes(const Boat* port[], size_t nbBoats,
+Price stddevAnnualTaxes(const Boat port[], size_t nbBoats,
                         bool (* condition)(const Boat*)) {
    Price mean = meanAnnualTaxes(port, nbBoats, condition);
    Price sum = 0;
@@ -152,8 +153,8 @@ Price stddevAnnualTaxes(const Boat* port[], size_t nbBoats,
    // Calcule la somme des carrés des écarts avec la moyenne des bateaux
    // correspondant à la condition.
    for (size_t i = 0; i < nbBoats; ++i) {
-      if (condition(port[i])) {
-         sum += (taxe(port[i]) - mean) * (taxe(port[i]) - mean);
+      if (condition(&port[i])) {
+         sum += (taxe(&port[i]) - mean) * (taxe(&port[i]) - mean);
          ++effectiveNumberOfBoat;
       }
    }
@@ -162,9 +163,9 @@ Price stddevAnnualTaxes(const Boat* port[], size_t nbBoats,
 }
 
 // ------------------------------------------------------------------------------
-// Affiche les taxes perçus du port
+// Affiche les taxes perçus du port.
 // ------------------------------------------------------------------------------
-void showTaxesPerCat(const Boat** port, size_t nbBoat) {
+void showTaxesPerCat(const Boat port[], size_t nbBoat) {
    bool (* conditions[])(const Boat*) = {isSailing, isPleasure, isFishing};
    const Name BOAT_NAME_TYPE[] = {PROPULSION_NAMES[0], MOTOR_BOAT_NAMES[1],
                                   MOTOR_BOAT_NAMES[0]};
