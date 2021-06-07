@@ -4,7 +4,7 @@
  Auteur(s)      : Clément Dieperink, Basile Cuneo, Joris Schaller
  Date creation  : 28.05.2021
 
- Description    : Fichier permettant de démontrer la fonctionnalités de
+ Description    : Fichier permettant de démontrer la fonctionnalité de
  nos différentes fonctions
 
  Remarque(s)    : -
@@ -42,7 +42,7 @@ int main(void) {
       showBoat(&port[i]);
    }
 
-   // Affiches les taxes des bateaux par catégorie.
+   // Affiche les taxes des bateaux par catégorie.
    showTaxesPerCat(port, NB_BOATS);
 
    return EXIT_SUCCESS;

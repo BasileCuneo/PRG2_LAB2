@@ -69,7 +69,8 @@ Price medianAnnualTaxes(const Boat port[], size_t nbBoats,
 
 // ------------------------------------------------------------------------------
 // Calcule la déviation standard des taxes annuelles des bateaux
-// du port qui correspondent à la condition passée en paramètre, retourne la médiane.
+// du port qui correspondent à la condition passée en paramètre,
+// retourne la déviation.
 // ------------------------------------------------------------------------------
 Price stddevAnnualTaxes(const Boat port[], size_t nbBoats,
                         bool (* condition)(const Boat* boat));

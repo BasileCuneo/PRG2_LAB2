@@ -79,7 +79,7 @@ Price meanAnnualTaxes(const Boat port[], size_t nbBoats,
    Price sum = 0;
 
    // Calcul la somme des taxes de tous les bateaux respectant la condition.
-   // Et récupère le nombre de bateau respectant la condition.
+   // et récupère le nombre de bateaux respectant la condition.
    for (size_t i = 0; i < nbBoats; ++i) {
       if (condition(&port[i])) {
          ++taxedBoat;
@@ -116,7 +116,7 @@ Price medianAnnualTaxes(const Boat port[], size_t nbBoats,
    size_t nEffectiveBoat = 0;
 
    // Calcul la taxe de tous les bateaux respectant la condition.
-   // Et récupère le nombre de bateau respectant la condition.
+   // et récupère le nombre de bateaux respectant la condition.
    for (size_t i = 0; i < nbBoats; ++i) {
       if (condition(&port[i])) {
          txs[nEffectiveBoat] = taxe(&port[i]);
@@ -132,7 +132,7 @@ Price medianAnnualTaxes(const Boat port[], size_t nbBoats,
    qsort(txs, nEffectiveBoat, sizeof(txs[0]), cmpfunc_price);
 
    if (nEffectiveBoat % 2 == 0) {
-      // Si il y a un nombre paire d'élément, la médiane est la moyenne des deux
+      // S'il y a un nombre paire d'élément, la médiane est la moyenne des deux
       // élément au milieu.
       return (txs[nEffectiveBoat / 2 - 1] + txs[nEffectiveBoat / 2]) / 2;
    } else {
@@ -141,8 +141,9 @@ Price medianAnnualTaxes(const Boat port[], size_t nbBoats,
 }
 
 // ------------------------------------------------------------------------------
-// Calcule la déviation standard des taxes annuelles des bateaux du port
-// qui correspondent à la condition passée en paramètre, retourne la médiane.
+// Calcule la déviation standard des taxes annuelles des bateaux
+// du port qui correspondent à la condition passée en paramètre,
+// retourne la déviation.
 // ------------------------------------------------------------------------------
 Price stddevAnnualTaxes(const Boat port[], size_t nbBoats,
                         bool (* condition)(const Boat*)) {
@@ -151,7 +152,7 @@ Price stddevAnnualTaxes(const Boat port[], size_t nbBoats,
    size_t effectiveNumberOfBoat = 0;
 
    // Calcule la somme des carrés des écarts avec la moyenne des bateaux
-   // correspondant à la condition.
+   // correspondants à la condition.
    for (size_t i = 0; i < nbBoats; ++i) {
       if (condition(&port[i])) {
          sum += (taxe(&port[i]) - mean) * (taxe(&port[i]) - mean);
@@ -163,7 +164,7 @@ Price stddevAnnualTaxes(const Boat port[], size_t nbBoats,
 }
 
 // ------------------------------------------------------------------------------
-// Affiche les taxes perçus du port.
+// Affiche les taxes perçues du port.
 // ------------------------------------------------------------------------------
 void showTaxesPerCat(const Boat port[], size_t nbBoat) {
    bool (* conditions[])(const Boat*) = {isSailing, isPleasure, isFishing};

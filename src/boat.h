@@ -4,7 +4,7 @@
  Auteur(s)      : Clément Dieperink, Basile Cuneo, Joris Schaller
  Date creation  : 28.05.2021
 
- Description    : Librairie permettant la gestion de bateau
+ Description    : Librairie permettant la gestion des bateaux
 
  Remarque(s)    : -
 
@@ -27,7 +27,7 @@ typedef enum {
    FISHING, PLEASURE
 } MotorBoatType;
 
-// Tableaux pour permettre contenant le nom des catégories et sous-catégories.
+// Tableaux pour permettre l'affichage des catégories et sous-catégories.
 static const Name PROPULSION_NAMES[] = {"Voilier", "Bateau a moteur"};
 static const Name MOTOR_BOAT_NAMES[] = {"Bateau de peche", "Bateau de plaisance"};
 
@@ -64,7 +64,7 @@ typedef union {
 
 // ------------------------------------------------------------------------------
 // Structure contenant les caractéristiques d'un bateau à moteur
-// c'est à dire : sa puissance son type et les propriétés relatives à son type.
+// c'est à dire : sa puissance, son type et les propriétés relatives à son type.
 // ------------------------------------------------------------------------------
 typedef struct {
    uint16_t power; // Cheval-vapeur [CV]
