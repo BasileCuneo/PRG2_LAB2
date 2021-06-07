@@ -85,7 +85,7 @@ typedef union {
 // Structure contenant le nom du bateau,son type de propulsion
 // et ses propriétés, dépendantes du type de propulsion.
 // ------------------------------------------------------------------------------
-typedef struct Boat {
+typedef struct {
    Name name;
    PropulsionType propulsionType;
    BoatProperties properties;
